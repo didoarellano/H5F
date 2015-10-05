@@ -33,7 +33,8 @@
             requiredClass : "required",
             placeholderClass : "placeholder",
             onSubmit : Function.prototype,
-            onInvalid : Function.prototype
+            onInvalid : Function.prototype,
+            placeholder: true
         };
 
         if(typeof settings === "object") {
@@ -93,8 +94,7 @@
             missing = valueMissing(elem),
             attrs = {
                 type: elem.getAttribute("type"),
-                pattern: elem.getAttribute("pattern"),
-                placeholder: elem.getAttribute("placeholder")
+                pattern: elem.getAttribute("pattern")
             },
             isType = /^(email|url)$/i,
             evt = /^(input|keyup)$/i,
@@ -118,7 +118,10 @@
             valid: (!missing && !patt && !step && !min && !max && !customError)
         };
 
-        if(attrs.placeholder && !evt.test(curEvt)) { placeholder(elem); }
+        if (args.placeholder) {
+            attrs.placeholder = elem.getAttribute("placeholder");
+            if(attrs.placeholder && !evt.test(curEvt)) { placeholder(elem); }
+        }
     };
     checkField = function(e) {
         var el = getTarget(e) || e, // checkValidity method passes element not event
