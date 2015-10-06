@@ -365,6 +365,7 @@
 
     // Since all methods are only used internally no need to expose globally
     return {
+        support: support,
         setup: setup
     };
 
